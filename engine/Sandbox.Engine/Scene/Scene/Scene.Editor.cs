@@ -1,61 +1,73 @@
-﻿namespace Sandbox;
-
-public partial class Scene : GameObject
+﻿namespace Sandbox
 {
-	/// <summary>
-	/// Allows access to the scene's editor session from the game. This will be null if there is no
-	/// editor session active on this scene.
-	/// </summary>
-	public ISceneEditorSession Editor { get; internal set; }
-
-	public interface ISceneEditorSession
+	public partial class Scene : GameObject
 	{
 		/// <summary>
-		/// True if this scene has unsaved changes
+		/// Allows access to the scene's editor session from the game. This will be null if there is no
+		/// editor session active on this scene.
 		/// </summary>
-		bool HasUnsavedChanges { get; set; }
+		public ISceneEditorSession Editor { get; internal set; }
 
-		/// <summary>
-		/// You have changed the editor's selection, add a new undo entry
-		/// </summary>
-		[Obsolete]
-		void AddSelectionUndo();
+		public interface ISceneEditorSession
+		{
+			/// <summary>
+			/// True if this scene has unsaved changes
+			/// </summary>
+			bool HasUnsavedChanges { get; set; }
 
-		[Obsolete]
-		void OnEditLog( string name, object source );
+			/// <summary>
+			/// You have changed the editor's selection, add a new undo entry
+			/// </summary>
+			[Obsolete]
+			void AddSelectionUndo();
 
-		/// <summary>
-		/// Focus the editor camera onto this box
-		/// </summary>
-		void FrameTo( in BBox box );
+			[Obsolete]
+			void OnEditLog( string name, object source );
 
-		/// <summary>
-		/// Save this scene to disk
-		/// </summary>
-		void Save( bool forceSaveAs );
+			/// <summary>
+			/// Focus the editor camera onto this box
+			/// </summary>
+			void FrameTo( in BBox box );
 
-		/// <summary>
-		/// Tell undo about this property change
-		/// </summary>
-		[Obsolete]
-		void RecordChange( SerializedProperty property );
+			/// <summary>
+			/// Save this scene to disk
+			/// </summary>
+			void Save( bool forceSaveAs );
 
-		/// <summary>
-		/// Add a new undo entry
-		/// </summary>
-		void AddUndo( string name, Action undo, Action redo );
+			/// <summary>
+			/// Tell undo about this property change
+			/// </summary>
+			[Obsolete]
+			void RecordChange( SerializedProperty property );
 
-		ISceneUndoScope UndoScope( string name );
+			/// <summary>
+			/// Add a new undo entry
+			/// </summary>
+			void AddUndo( string name, Action undo, Action redo );
 
-		/// <summary>
-		/// If we have any gameobjects selected, return the first one
-		/// </summary>
-		public GameObject SelectedGameObject => GetSelection().OfType<GameObject>().FirstOrDefault();
+			ISceneUndoScope UndoScope( string name );
 
-		/// <summary>
-		/// Gets the current selection from the editor
-		/// </summary>
-		public IEnumerable<object> GetSelection();
+			/// <summary>
+			/// If we have any gameobjects selected, return the first one
+			/// </summary>
+			public GameObject SelectedGameObject => GetSelection().OfType<GameObject>().FirstOrDefault();
+
+			/// <summary>
+			/// Gets the current selection from the editor
+			/// </summary>
+			public IEnumerable<object> GetSelection();
+
+			/// <summary>
+			/// Get the filesystem in which temporary files can be created. These files can be used (and shipped) by a package, but won't be stored in source control.
+			/// This is usually used for files that are expected to be re-generated at runtime by the package itself.
+			/// </summary>
+			public BaseFileSystem TransientFilesystem { get; }
+
+			/// <summary>
+			/// Get the folder for this scene. This is a folder in which we can store assets that are referenced by this scene. Things like envmap textures, lightmaps, baked data, etc.
+			/// </summary>
+			public Editor.SceneFolder GetSceneFolder() => null;
+		}
 	}
 }
 
@@ -81,4 +93,16 @@ public interface ISceneUndoScope
 	ISceneUndoScope WithComponentChanges( IEnumerable<Component> components );
 	ISceneUndoScope WithComponentChanges( Component component );
 	IDisposable Push();
+}
+
+
+namespace Editor
+{
+	public abstract class SceneFolder
+	{
+		/// <summary>
+		/// Write a file to the path relative to the scene folder, return the path relative to the root.
+		/// </summary>
+		public abstract string WriteFile( string filename, byte[] data );
+	}
 }

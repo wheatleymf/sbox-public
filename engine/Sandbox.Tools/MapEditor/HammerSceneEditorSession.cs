@@ -1,9 +1,7 @@
-﻿using System;
-using Editor.MapDoc;
+﻿using Editor.MapDoc;
 using Facepunch.ActionGraphs;
 using Sandbox.ActionGraphs;
-using Sandbox.Helpers;
-using static Sandbox.Scene;
+using System;
 
 namespace Editor.MapEditor;
 
@@ -118,6 +116,8 @@ public partial class HammerSceneEditorSession : Scene.ISceneEditorSession
 	{
 		yield break;
 	}
+
+	BaseFileSystem Scene.ISceneEditorSession.TransientFilesystem => FileSystem.Transient;
 }
 
 /// <summary>
