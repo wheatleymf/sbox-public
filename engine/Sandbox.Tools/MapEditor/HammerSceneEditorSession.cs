@@ -12,6 +12,9 @@ public partial class HammerSceneEditorSession : Scene.ISceneEditorSession
 	public Scene Scene { get; }
 	public MapWorld MapWorld { get; }
 
+	// unused, but required by interface
+	public SelectionSystem Selection { get; } = new SelectionSystem();
+
 	public ISourceLocation SourceLocation { get; }
 
 	private bool _destroyed;

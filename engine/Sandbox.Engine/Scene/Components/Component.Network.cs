@@ -97,6 +97,13 @@ public abstract partial class Component
 
 	[EditorBrowsable( EditorBrowsableState.Never )]
 	[MethodImpl( MethodImplOptions.AggressiveInlining )]
+	protected void __rpc_Wrapper<T>( in WrappedMethod m, T[] argument )
+	{
+		Rpc.OnCallInstanceRpc( GameObject, this, m, [argument] );
+	}
+
+	[EditorBrowsable( EditorBrowsableState.Never )]
+	[MethodImpl( MethodImplOptions.AggressiveInlining )]
 	protected void __rpc_Wrapper( in WrappedMethod m, params object[] argumentList )
 	{
 		Rpc.OnCallInstanceRpc( GameObject, this, m, argumentList );

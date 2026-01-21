@@ -420,9 +420,16 @@ public partial class GameObject
 
 	[EditorBrowsable( EditorBrowsableState.Never )]
 	[MethodImpl( MethodImplOptions.AggressiveInlining )]
+	protected void __rpc_Wrapper<T>( in WrappedMethod m, T[] argument )
+	{
+		Rpc.OnCallInstanceRpc( this, null, m, [argument] );
+	}
+
+	[EditorBrowsable( EditorBrowsableState.Never )]
+	[MethodImpl( MethodImplOptions.AggressiveInlining )]
 	protected void __rpc_Wrapper( in WrappedMethod m, params object[] argumentList )
 	{
-		Rpc.OnCallInstanceRpc( this, default, m, argumentList );
+		Rpc.OnCallInstanceRpc( this, null, m, argumentList );
 	}
 
 	/// <summary>

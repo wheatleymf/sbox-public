@@ -11,9 +11,24 @@
 		public interface ISceneEditorSession
 		{
 			/// <summary>
+			/// The scene for this session
+			/// </summary>
+			Scene Scene { get; }
+
+			/// <summary>
 			/// True if this scene has unsaved changes
 			/// </summary>
 			bool HasUnsavedChanges { get; set; }
+
+			/// <summary>
+			/// Selection system for this session
+			/// </summary>
+			SelectionSystem Selection { get; }
+
+			/// <summary>
+			/// If we have any gameobjects selected, return the first one
+			/// </summary>
+			public GameObject SelectedGameObject => Selection.OfType<GameObject>().FirstOrDefault();
 
 			/// <summary>
 			/// You have changed the editor's selection, add a new undo entry
@@ -48,13 +63,9 @@
 			ISceneUndoScope UndoScope( string name );
 
 			/// <summary>
-			/// If we have any gameobjects selected, return the first one
-			/// </summary>
-			public GameObject SelectedGameObject => GetSelection().OfType<GameObject>().FirstOrDefault();
-
-			/// <summary>
 			/// Gets the current selection from the editor
 			/// </summary>
+			[Obsolete( "Use Selection" )]
 			public IEnumerable<object> GetSelection();
 
 			/// <summary>

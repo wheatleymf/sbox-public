@@ -40,7 +40,7 @@ native class Glue.Networking
 	static ESteamNetworkingAvailability GetAuthenticationStatus( IntPtr debugMsg );
 	static ESteamNetworkingAvailability GetRelayNetworkStatus( IntPtr debugMsg );
 	static HSteamListenSocket CreateSocket( int virtualPort );
-	static HSteamListenSocket CreateIpBasedSocket( bool useFakeIP );
+	static HSteamListenSocket CreateIpBasedSocket( int port, bool hideAddress );
 	static void CloseSocket( HSteamListenSocket socket );
 	static string GetSocketAddress( HSteamListenSocket socket );
 	static void BeginAsyncRequestFakeIP();

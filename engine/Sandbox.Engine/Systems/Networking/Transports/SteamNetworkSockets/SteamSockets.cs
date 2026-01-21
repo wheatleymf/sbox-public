@@ -36,7 +36,7 @@ internal static partial class SteamNetwork
 		{
 			SteamNetwork.Initialize();
 
-			InitHandle( Glue.Networking.CreateIpBasedSocket( Networking.UseFakeIP ) );
+			InitHandle( Glue.Networking.CreateIpBasedSocket( Networking.Port, Networking.HideAddress ) );
 			address = Glue.Networking.GetSocketAddress( handle );
 		}
 
