@@ -178,6 +178,9 @@ public class AssetPreview : IDisposable
 		using var bitmap = new Bitmap( config.Width, config.Height );
 		IsRenderingVideo = true;
 
+		// Update ScreenSize so FrameScene() calculates correct camera distance
+		ScreenSize = new Vector2Int( config.Width, config.Height );
+
 		for ( float i = 0; i < frames; i += 1.0f )
 		{
 			float delta = i / frames;
