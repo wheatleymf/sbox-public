@@ -2256,6 +2256,67 @@
 									},
 									{
 										_class = "AnimFile"
+										name = "SitPose_RaiseArms"
+										children = 
+										[
+											{
+												_class = "AnimAddLayer"
+												anim_name = "_CONVERT_CITIZEN_ANIMS"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/citizen/animations/Citizen@SitPose_RaiseArms.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 3.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "SitPose_RaiseArms_delta"
+										children = 
+										[
+											{
+												_class = "AnimSubtract"
+												anim_name = "SitPose_Default"
+												frame = 0
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/citizen/animations/Citizen@SitPose_RaiseArms.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 3.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
 										name = "SitGroundPose_Default"
 										children = 
 										[
